@@ -11,12 +11,11 @@ using namespace std;
 
 class Customer
 {
-private:
-  string firstName;
-  string lastName;
-
 public:
   Customer(string firstName, string lastName);
+
+  string firstName;
+  string lastName;
 
   unordered_map<pair<string, string>, int, PairStringHash> mm;
 

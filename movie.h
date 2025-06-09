@@ -61,11 +61,11 @@ public:
   virtual string getSecond() = 0;
 
   int stock;
+  string title;
 
 protected:
   string typeFull;
   string director;
-  string title;
 };
 
 #endif

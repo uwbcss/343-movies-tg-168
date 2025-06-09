@@ -56,9 +56,11 @@ void ReturnCommand::execute() const
 
   MovieFactory::getMapC().at(movieType)->movies.at(key)->stock++;
   System::customers[id]->mm[key]--;
+  System::customers[id]->history.push_back(
+      "Return " + MovieFactory::getMapC().at(movieType)->movies.at(key)->title);
 }
 
-ReturnCommandFactory::ReturnCommandFactory() { registerType("B", this); }
+ReturnCommandFactory::ReturnCommandFactory() { registerType("R", this); }
 
 Command *ReturnCommandFactory::makeCommand(const string &detail) const
 {

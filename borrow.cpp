@@ -56,6 +56,8 @@ void Borrow::execute() const
 
   MovieFactory::getMapC().at(movieType)->movies.at(key)->reduceStock();
   System::customers[id]->mm[key]++;
+  System::customers[id]->history.push_back(
+      "Borrow " + MovieFactory::getMapC().at(movieType)->movies.at(key)->title);
 }
 
 BorrowFactory::BorrowFactory() { registerType("B", this); }
