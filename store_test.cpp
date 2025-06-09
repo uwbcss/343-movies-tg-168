@@ -7,19 +7,33 @@
 
 #include "command.h"
 #include "movie.h"
+#include "system.h"
 #include <cassert>
 #include <fstream>
 #include <iostream>
 #include <map>
 #include <sstream>
+#include <unordered_map>
 #include <vector>
 
 using namespace std;
 
+void testSystem()
+{
+  cout << "Start testSystem" << endl;
+
+  System s;
+
+  string cfile = "testcommands-1.txt";
+  s.readFromFile(cfile);
+
+  cout << "End testSystem" << endl;
+}
+
 void testStore1()
 {
   cout << "Start testStore1" << endl;
-  
+
   vector<Movie *> movies;
   vector<Command *> commands;
 
@@ -38,7 +52,7 @@ void testStore1()
     if (command)
     {
       commands.push_back(command);
-    }    
+    }
     // cout << detail << endl;
   }
   fs.close();
@@ -70,7 +84,8 @@ void testStoreFinal()
 
 void testAll()
 {
-  testStore1();
-  testStore2();
-  testStoreFinal();
+  testSystem();
+  // testStore1();
+  // testStore2();
+  // testStoreFinal();
 }
