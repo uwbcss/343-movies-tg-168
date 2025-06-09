@@ -5,14 +5,13 @@
 #include <algorithm>
 #include <iostream>
 
+// constructor
 Borrow::Borrow(string detail) : detail(detail) {}
 
 // execute the command
-void Borrow::execute() const
-{
+void Borrow::execute() const {
   string mediaType = detail.substr(6, 1);
-  if (mediaType != "D")
-  {
+  if (mediaType != "D") {
     cout << "Invalid media type " << mediaType
          << ", discarding line: " << detail.substr(7) << endl;
 
@@ -20,8 +19,7 @@ void Borrow::execute() const
   }
 
   string movieType = detail.substr(8, 1);
-  if (MovieFactory::getMapC().count(movieType) == 0)
-  {
+  if (MovieFactory::getMapC().count(movieType) == 0) {
     cout << "Invalid movie type " << movieType
          << ", discarding line: " << detail.substr(7) << endl;
 
@@ -29,8 +27,7 @@ void Borrow::execute() const
   }
 
   int id = stoi(detail.substr(1, 4));
-  if (System::customers.count(id) == 0)
-  {
+  if (System::customers.count(id) == 0) {
     cout << "Invalid customer ID " << id
          << ", discarding line: " << detail.substr(7) << endl;
 
@@ -40,15 +37,13 @@ void Borrow::execute() const
   pair<string, string> key =
       MovieFactory::getMapC().at(movieType)->toKey(detail.substr(10));
 
-  if (MovieFactory::getMapC().at(movieType)->movies.count(key) == 0)
-  {
+  if (MovieFactory::getMapC().at(movieType)->movies.count(key) == 0) {
     cout << "Invalid movie, discarding line: " << detail.substr(7) << endl;
 
     return;
   }
 
-  if (MovieFactory::getMapC().at(movieType)->movies.at(key)->stock == 0)
-  {
+  if (MovieFactory::getMapC().at(movieType)->movies.at(key)->stock == 0) {
     cout << "no stock left, discarding line: " << detail.substr(7) << endl;
 
     return;
@@ -60,11 +55,12 @@ void Borrow::execute() const
       "Borrow " + MovieFactory::getMapC().at(movieType)->movies.at(key)->title);
 }
 
+// constructor
 BorrowFactory::BorrowFactory() { registerType("B", this); }
 
-Command *BorrowFactory::makeCommand(const string &detail) const
-{
+// make a Borrow command
+Command *BorrowFactory::makeCommand(const string &detail) const {
   return new Borrow(detail);
 }
 
-BorrowFactory anonymous_BorrowFactory;
+BorrowFactory anonymousBorrowFactory;

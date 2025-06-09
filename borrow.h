@@ -7,20 +7,19 @@
 
 using namespace std;
 
-class Borrow : public Command
-{
+class Borrow : public Command {
 private:
   string detail;
 
 public:
-  Borrow(string detail);
+  // constructor
+  explicit Borrow(string detail);
 
   // borrow a movie
   void execute() const override;
 };
 
-class BorrowFactory : public CommandFactory
-{
+class BorrowFactory : public CommandFactory {
 public:
   // register this factory
   BorrowFactory();

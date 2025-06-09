@@ -11,25 +11,31 @@ using namespace std;
 
 class Movie;
 
-class MovieFactory
-{
+class MovieFactory {
   friend class System;
 
 public:
+  // destructor
+  ~MovieFactory();
+
   // make a movie, implemented by subclasses
   virtual Movie *makeMovie(const string &detail) = 0;
 
+  // get movies of a type
   virtual vector<Movie *> getMovies() = 0;
 
   // find the corresponding movie factory and get factory to create the object
   static Movie *create(const string &type, const string &detail);
 
+  // get movie factories
   static const unordered_map<string, MovieFactory *> &getMapC();
 
+  // getter
   string getType();
 
   unordered_map<pair<string, string>, Movie *, PairStringHash> movies;
 
+  // turn command into key
   virtual pair<string, string> toKey(string detail) = 0;
 
 protected:
@@ -43,29 +49,30 @@ private:
   static unordered_map<string, MovieFactory *> &getMap();
 };
 
-class Movie
-{
+class Movie {
 public:
   // constructor
   Movie(string typeFull, int stock, string director, string title);
 
+  // getter
   virtual string getInfo() = 0;
 
   // Abstract classes should always have virtual destructors
   virtual ~Movie() = default;
 
+  // reduce stock by 1
   void reduceStock();
 
+  // getter
   virtual string getFirst() = 0;
 
+  // getter
   virtual string getSecond() = 0;
 
-  int stock;
-  string title;
-
-protected:
   string typeFull;
+  int stock;
   string director;
+  string title;
 };
 
 #endif

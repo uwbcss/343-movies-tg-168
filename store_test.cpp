@@ -18,19 +18,18 @@
 
 using namespace std;
 
-void testSystem()
-{
+void testSystem() {
   cout << "Start testSystem" << endl;
 
   System s;
 
   string mfile = "data4movies.txt";
-  s.readMoviesFromFile(mfile);
+  System::readMoviesFromFile(mfile);
 
   string cufile = "data4customers.txt";
-  s.readCustomersFromFile(cufile);
+  System::readCustomersFromFile(cufile);
 
-  string cofile = "testcommands-1.txt";
+  string cofile = "data4commands.txt";
   s.readCommandsFromFile(cofile);
 
   s.executeAll();
@@ -38,8 +37,7 @@ void testSystem()
   cout << "End testSystem" << endl;
 }
 
-void testStore1()
-{
+void testStore1() {
   cout << "Start testStore1" << endl;
 
   vector<Movie *> movies;
@@ -51,14 +49,12 @@ void testStore1()
   assert(fs.is_open());
   string commandType;
   string detail;
-  while (fs >> commandType)
-  {
+  while (fs >> commandType) {
     out << commandType;
     getline(fs, detail);
 
     Command *command = CommandFactory::create(commandType, detail);
-    if (command)
-    {
+    if (command != nullptr) {
       commands.push_back(command);
     }
     // cout << detail << endl;
@@ -67,8 +63,7 @@ void testStore1()
   string result = "IHHBRIBBIH";
   assert(out.str() == result);
 
-  for (const auto &command : commands)
-  {
+  for (const auto &command : commands) {
     command->execute();
     delete command;
   }
@@ -76,22 +71,19 @@ void testStore1()
   cout << "End testStore1" << endl;
 }
 
-void testStore2()
-{
+void testStore2() {
   cout << "Start testStore2" << endl;
   cout << "End testStore2" << endl;
 }
 
-void testStoreFinal()
-{
+void testStoreFinal() {
   cout << "=====================================" << endl;
   cout << "Start testStoreFinal" << endl;
   cout << "End testStoreFinal" << endl;
   cout << "=====================================" << endl;
 }
 
-void testAll()
-{
+void testAll() {
   testSystem();
   // testStore1();
   // testStore2();

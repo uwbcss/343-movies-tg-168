@@ -7,15 +7,13 @@
 
 using namespace std;
 
-class ShowInventory : public Command
-{
+class ShowInventory : public Command {
 public:
-  //show the inventory of movies
+  // show the inventory of movies
   void execute() const override;
 };
 
-class ShowInventoryFactory : public CommandFactory
-{
+class ShowInventoryFactory : public CommandFactory {
 public:
   // register this factory
   ShowInventoryFactory();

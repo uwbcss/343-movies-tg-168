@@ -9,9 +9,9 @@
 
 using namespace std;
 
-class Customer
-{
+class Customer {
 public:
+// constructor
   Customer(string firstName, string lastName);
 
   string firstName;

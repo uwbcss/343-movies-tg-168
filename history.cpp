@@ -5,13 +5,12 @@
 #include <algorithm>
 #include <iostream>
 
+// constructor
 History::History(string detail) : detail(detail) {}
 
 // execute the command
-void History::execute() const
-{
-  if (detail.size() == 0)
-  {
+void History::execute() const {
+  if (detail.empty()) {
     cout << "Invalid command" << endl;
 
     return;
@@ -22,24 +21,23 @@ void History::execute() const
   cout << "History for " << id << " " << System::customers[id]->firstName << " "
        << System::customers[id]->lastName << ":" << endl;
 
-  if (System::customers[id]->history.size() == 0)
-  {
+  if (System::customers[id]->history.empty()) {
     cout << "No history" << endl;
 
     return;
   }
 
-  for (auto &&i : System::customers[id]->history)
-  {
+  for (auto &&i : System::customers[id]->history) {
     cout << i << endl;
   }
 }
 
+// register this factory
 HistoryFactory::HistoryFactory() { registerType("H", this); }
 
-Command *HistoryFactory::makeCommand(const string &detail) const
-{
+// make a History command
+Command *HistoryFactory::makeCommand(const string &detail) const {
   return new History(detail);
 }
 
-HistoryFactory anonymous_HistoryFactory;
+HistoryFactory anonymousHistoryFactory;

@@ -9,8 +9,7 @@ using namespace std;
 
 class Command;
 
-class CommandFactory
-{
+class CommandFactory {
 public:
   // make a command, implemented by subclasses
   virtual Command *makeCommand(const string &detail) const = 0;
@@ -27,8 +26,7 @@ private:
   static unordered_map<string, CommandFactory *> &getMap();
 };
 
-class Command
-{
+class Command {
 public:
   // different commands have different uses, implemented by subclasses
   virtual void execute() const = 0;

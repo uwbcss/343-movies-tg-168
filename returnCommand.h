@@ -7,20 +7,19 @@
 
 using namespace std;
 
-class ReturnCommand : public Command
-{
+class ReturnCommand : public Command {
 private:
   string detail;
 
 public:
-  ReturnCommand(string detail);
+  // constructor
+  explicit ReturnCommand(string detail);
 
   // return a movie
   void execute() const override;
 };
 
-class ReturnCommandFactory : public CommandFactory
-{
+class ReturnCommandFactory : public CommandFactory {
 public:
   // register this factory
   ReturnCommandFactory();

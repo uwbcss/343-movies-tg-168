@@ -6,13 +6,11 @@
 
 using namespace std;
 
-struct PairStringHash
-{
-  size_t operator()(pair<string, string> const &p) const noexcept
-  {
+struct PairStringHash {
+  // hash
+  size_t operator()(pair<string, string> const &p) const noexcept {
     size_t h = 0;
-    for (char c : p.first)
-    {
+    for (char c : p.first) {
       h = (h << 5) + h + c;
     }
 

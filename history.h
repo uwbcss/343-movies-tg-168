@@ -1,5 +1,5 @@
 #ifndef HISTORY_H
-#define HISTORY_H_H
+#define HISTORY_H
 
 #include "command.h"
 #include <string>
@@ -7,20 +7,19 @@
 
 using namespace std;
 
-class History : public Command
-{
+class History : public Command {
 private:
   string detail;
 
 public:
-  History(string detail);
+  // constructor
+  explicit History(string detail);
 
   // display history
   void execute() const override;
 };
 
-class HistoryFactory : public CommandFactory
-{
+class HistoryFactory : public CommandFactory {
 public:
   // register this factory
   HistoryFactory();
