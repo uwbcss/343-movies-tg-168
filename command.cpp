@@ -16,7 +16,7 @@ void CommandFactory::registerType(const string &type, CommandFactory *factory)
 }
 
 // find the corresponding command factory and get factory to create the object
-Command *CommandFactory::create(const string &type)
+Command *CommandFactory::create(const string &type, const string &detail)
 {
   if (!getMap().count(type))
   {
@@ -24,5 +24,5 @@ Command *CommandFactory::create(const string &type)
     return nullptr;
   }
 
-  return getMap().at(type)->makeCommand();  
+  return getMap().at(type)->makeCommand(detail);  
 }

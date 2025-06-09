@@ -13,10 +13,10 @@ class CommandFactory
 {
 public:
   // make a command, implemented by subclasses
-  virtual Command *makeCommand() const = 0;
+  virtual Command *makeCommand(const string &detail) const = 0;
 
   // find the corresponding command factory and get factory to create the object
-  static Command *create(const string &type);
+  static Command *create(const string &type, const string &detail);
 
 protected:
   // register a concrete factory with a given name
