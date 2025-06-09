@@ -1,14 +1,14 @@
-#include "borrow.h"
+#include "returnCommand.h"
 #include "movie.h"
 #include "system.h"
 
 #include <algorithm>
 #include <iostream>
 
-Borrow::Borrow(string detail) : detail(detail) {}
+ReturnCommand::ReturnCommand(string detail) : detail(detail) {}
 
 // execute the command
-void Borrow::execute() const
+void ReturnCommand::execute() const
 {
   string mediaType = detail.substr(6, 1);
   if (mediaType != "D")
@@ -47,22 +47,22 @@ void Borrow::execute() const
     return;
   }
 
-  if (MovieFactory::getMapC().at(movieType)->movies.at(key)->stock == 0)
+  if (System::customers[id]->mm[key] == 0)
   {
-    cout << "no stock left, discarding line: " << detail.substr(7) << endl;
+    cout << "no such movie to return, discarding line: " << detail.substr(7) << endl;
 
     return;
   }
 
-  MovieFactory::getMapC().at(movieType)->movies.at(key)->reduceStock();
-  System::customers[id]->mm[key]++;
+  MovieFactory::getMapC().at(movieType)->movies.at(key)->stock++;
+  System::customers[id]->mm[key]--;
 }
 
-BorrowFactory::BorrowFactory() { registerType("B", this); }
+ReturnCommandFactory::ReturnCommandFactory() { registerType("B", this); }
 
-Command *BorrowFactory::makeCommand(const string &detail) const
+Command *ReturnCommandFactory::makeCommand(const string &detail) const
 {
-  return new Borrow(detail);
+  return new ReturnCommand(detail);
 }
 
-BorrowFactory anonymous_BorrowFactory;
+ReturnCommandFactory anonymous_ReturnCommandFactory;
