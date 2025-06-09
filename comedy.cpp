@@ -32,7 +32,7 @@ Movie *ComedyFactory::makeMovie(const string &detail)
   vector<string> vs = System::splitString(detail);
 
   Comedy *comedy = new Comedy(stoi(vs[0]), vs[1], vs[2], stoi(vs[3]));
-  comedies[make_pair(comedy->title, comedy->year)] = comedy;
+  movies[make_pair(comedy->title, to_string(comedy->year))] = comedy;
 
   return comedy;
 }
@@ -40,7 +40,7 @@ Movie *ComedyFactory::makeMovie(const string &detail)
 vector<Movie *> ComedyFactory::getMovies()
 {
   vector<Movie *> vm;
-  for (auto &&[key, movie] : comedies)
+  for (auto &&[key, movie] : movies)
   {
     vm.push_back(movie);
   }
@@ -57,6 +57,15 @@ vector<Movie *> ComedyFactory::getMovies()
        });
 
   return vm;
+}
+
+pair<string, string> ComedyFactory::toKey(string detail)
+{
+  vector<string> vs = System::splitString(detail, ',');
+  string title = vs[0];
+  string year = vs[1].substr(0);
+
+  return make_pair(title, year);
 }
 
 ComedyFactory anonymous_ComedyFactory;

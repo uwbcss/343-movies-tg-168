@@ -32,7 +32,7 @@ Movie *DramaFactory::makeMovie(const string &detail)
   vector<string> vs = System::splitString(detail);
 
   Drama *drama = new Drama(stoi(vs[0]), vs[1], vs[2], stoi(vs[3]));
-  dramas[make_pair(drama->director, drama->title)] = drama;
+  movies[make_pair(drama->director, drama->title)] = drama;
 
   return drama;
 }
@@ -40,7 +40,7 @@ Movie *DramaFactory::makeMovie(const string &detail)
 vector<Movie *> DramaFactory::getMovies()
 {
   vector<Movie *> vm;
-  for (auto &&[key, movie] : dramas)
+  for (auto &&[key, movie] : movies)
   {
     vm.push_back(movie);
   }
@@ -57,6 +57,15 @@ vector<Movie *> DramaFactory::getMovies()
        });
 
   return vm;
+}
+
+pair<string, string> DramaFactory::toKey(string detail)
+{
+  vector<string> vs = System::splitString(detail, ',');
+  string director = vs[0];
+  string title = vs[1].substr(1);
+
+  return make_pair(director, title);
 }
 
 DramaFactory anonymous_DramaFactory;

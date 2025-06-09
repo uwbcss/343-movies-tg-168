@@ -27,8 +27,11 @@ void testSystem()
   string mfile = "data4movies.txt";
   s.readMoviesFromFile(mfile);
 
-  string cfile = "testcommands-1.txt";
-  s.readCommandsFromFile(cfile);
+  string cufile = "data4customers.txt";
+  s.readCustomersFromFile(cufile);
+
+  string cofile = "testcommands-1.txt";
+  s.readCommandsFromFile(cofile);
 
   s.executeAll();
 

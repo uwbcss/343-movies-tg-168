@@ -2,7 +2,6 @@
 #include "system.h"
 
 #include <algorithm>
-#include <iostream>
 #include <string>
 #include <vector>
 
@@ -37,15 +36,8 @@ Movie *ClassicFactory::makeMovie(const string &detail)
 {
   vector<string> vs = System::splitString(detail);
 
-  for (auto &&v : vs)
-  {
-    cout << v << endl;
-  }
-
   Classic *classic = new Classic(stoi(vs[0]), vs[1], vs[2], vs[3]);
-  // cout << classic->date << endl;
-  // cout << classic->actor << endl;
-  classics[make_pair(classic->date, classic->actor)] = classic;
+  movies[make_pair(classic->date, classic->actor)] = classic;
 
   return classic;
 }
@@ -53,7 +45,7 @@ Movie *ClassicFactory::makeMovie(const string &detail)
 vector<Movie *> ClassicFactory::getMovies()
 {
   vector<Movie *> vm;
-  for (auto &&[key, movie] : classics)
+  for (auto &&[key, movie] : movies)
   {
     vm.push_back(movie);
   }
@@ -81,6 +73,17 @@ vector<Movie *> ClassicFactory::getMovies()
        });
 
   return vm;
+}
+
+pair<string, string> ClassicFactory::toKey(string detail)
+{
+  vector<string> vs = System::splitString(detail, ' ');
+  string month = vs[0];
+  string year = vs[1];
+  string date = year + " " + month;
+  string actor = vs[2] + " " + vs[3];
+
+  return make_pair(date, actor);
 }
 
 ClassicFactory anonymous_ClassicFactory;

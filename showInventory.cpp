@@ -2,9 +2,10 @@
 #include "movie.h"
 
 #include <algorithm>
+#include <iostream>
 
 // execute the command
-vector<string> ShowInventory::execute() const
+void ShowInventory::execute() const
 {
   vector<MovieFactory *> vmf;
   for (auto &&[key, factory] : MovieFactory::getMapC())
@@ -31,7 +32,10 @@ vector<string> ShowInventory::execute() const
     vs.push_back(movie->getInfo());
   }
 
-  return vs;
+  for (auto &&s : vs)
+  {
+    cout << s << endl;
+  }
 }
 
 ShowInventoryFactory::ShowInventoryFactory() { registerType("I", this); }

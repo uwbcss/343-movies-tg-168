@@ -2,10 +2,6 @@
 #include <iostream>
 #include <unordered_map>
 
-string Movie::getDirector() { return director; }
-
-string Movie::getTitle() { return title; }
-
 // Storage place for the concrete movie factories
 unordered_map<string, MovieFactory *> &MovieFactory::getMap()
 {
@@ -45,3 +41,5 @@ Movie::Movie(string typeFull, int stock, string director, string title)
     : typeFull(typeFull), stock(stock), director(director), title(title)
 {
 }
+
+void Movie::reduceStock() { stock--; }

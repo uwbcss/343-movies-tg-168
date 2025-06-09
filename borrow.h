@@ -1,5 +1,5 @@
-#ifndef SHOW_INVENTORY_H
-#define SHOW_INVENTORY_H
+#ifndef BORROW_H
+#define BORROW_H
 
 #include "command.h"
 #include <string>
@@ -7,20 +7,25 @@
 
 using namespace std;
 
-class ShowInventory : public Command
+class Borrow : public Command
 {
+private:
+  string detail;
+
 public:
-  //show the inventory of movies
+  Borrow(string detail);
+
+  // borrow a movie
   void execute() const override;
 };
 
-class ShowInventoryFactory : public CommandFactory
+class BorrowFactory : public CommandFactory
 {
 public:
   // register this factory
-  ShowInventoryFactory();
+  BorrowFactory();
 
-  // make a ShowInventory command
+  // make a Borrow command
   Command *makeCommand(const string &detail) const override;
 };
 

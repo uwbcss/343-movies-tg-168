@@ -1,6 +1,8 @@
 #ifndef MOVIE_H
 #define MOVIE_H
 
+#include "PairHash.h"
+
 #include <string>
 #include <unordered_map>
 #include <vector>
@@ -26,6 +28,10 @@ public:
 
   string getType();
 
+  unordered_map<pair<string, string>, Movie *, PairStringHash> movies;
+
+  virtual pair<string, string> toKey(string detail) = 0;
+
 protected:
   // register a concrete factory with a given name
   static void registerType(const string &type, MovieFactory *factory);
@@ -48,17 +54,16 @@ public:
   // Abstract classes should always have virtual destructors
   virtual ~Movie() = default;
 
-  string getDirector();
-
-  string getTitle();
+  void reduceStock();
 
   virtual string getFirst() = 0;
 
   virtual string getSecond() = 0;
 
+  int stock;
+
 protected:
   string typeFull;
-  int stock;
   string director;
   string title;
 };

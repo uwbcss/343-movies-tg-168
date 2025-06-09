@@ -1,0 +1,1 @@
+g++ -g -Wall -Wextra -Wno-sign-compare comedy.cpp command.cpp main.cpp movie.cpp showInventory.cpp store_test.cpp system.cpp drama.cpp classic.cpp customer.cpp

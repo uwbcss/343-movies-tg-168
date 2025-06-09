@@ -30,6 +30,25 @@ void System::readCommandsFromFile(const string &filename)
   fs.close();
 }
 
+std::unordered_map<int, Customer*> System::customers;
+
+void System::readCustomersFromFile(const string &filename)
+{
+  ifstream fs(filename);
+  assert(fs.is_open());
+  int id;
+  while (fs >> id)
+  {
+    string firstName;
+    fs >> firstName;
+    string lastName;
+    fs >> lastName;
+
+    customers[id] = new Customer(firstName, lastName);
+  }
+  fs.close();
+}
+
 // add a new movie to the list
 void System::addMovie(const string &type, const string &detail)
 {
@@ -59,14 +78,7 @@ void System::executeAll()
 {
   for (const auto &command : commands)
   {
-    vector<string> vs = command->execute();
-    if (vs.size())
-    {
-      for (auto &&s : vs)
-      {
-        cout << s << endl;
-      }
-    }
+    command->execute();
 
     delete command;
   }

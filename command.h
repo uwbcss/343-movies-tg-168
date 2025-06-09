@@ -31,7 +31,7 @@ class Command
 {
 public:
   // different commands have different uses, implemented by subclasses
-  virtual vector<string> execute() const = 0;
+  virtual void execute() const = 0;
 
   // Abstract classes should always have virtual destructors
   virtual ~Command() = default;

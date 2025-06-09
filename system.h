@@ -2,6 +2,7 @@
 #define SYSTEM_H
 
 #include "command.h"
+#include "customer.h"
 #include "movie.h"
 
 #include <sstream>
@@ -18,6 +19,8 @@ public:
   // read commands from a txt file
   void readCommandsFromFile(const string &filename);
 
+  void readCustomersFromFile(const string &filename);
+
   // add a new movie to the list
   void addMovie(const string &type, const string &detail);
 
@@ -32,6 +35,8 @@ public:
 
   // helper - split string into multiple based on delimiter
   static vector<string> splitString(const string &str, char delimiter = ',');
+
+  static unordered_map<int, Customer *> customers;
 };
 
 #endif
