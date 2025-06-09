@@ -2,6 +2,8 @@
 #include <iostream>
 #include <unordered_map>
 
+string Movie::getDirector() { return director; }
+
 string Movie::getTitle() { return title; }
 
 // Storage place for the concrete movie factories
@@ -15,6 +17,9 @@ const unordered_map<string, MovieFactory *> &MovieFactory::getMapC()
 {
   return getMap();
 }
+
+// return movie type
+string MovieFactory::getType() { return type; }
 
 // register a concrete factory with a given name
 void MovieFactory::registerType(const string &type, MovieFactory *factory)

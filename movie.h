@@ -13,7 +13,7 @@ class MovieFactory
 {
   friend class System;
 
-public:  
+public:
   // make a movie, implemented by subclasses
   virtual Movie *makeMovie(const string &detail) = 0;
 
@@ -24,9 +24,13 @@ public:
 
   static const unordered_map<string, MovieFactory *> &getMapC();
 
+  string getType();
+
 protected:
   // register a concrete factory with a given name
   static void registerType(const string &type, MovieFactory *factory);
+
+  string type;
 
 private:
   // Storage place for the concrete movie factories
@@ -38,15 +42,19 @@ class Movie
 public:
   // constructor
   Movie(string typeFull, int stock, string director, string title);
-  
+
   virtual string getInfo() = 0;
 
   // Abstract classes should always have virtual destructors
   virtual ~Movie() = default;
 
+  string getDirector();
+
   string getTitle();
 
-  virtual int getYear() = 0;
+  virtual string getFirst() = 0;
+
+  virtual string getSecond() = 0;
 
 protected:
   string typeFull;

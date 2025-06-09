@@ -1,5 +1,5 @@
-#ifndef COMEDY_H
-#define COMEDY_H
+#ifndef DRAMA_H
+#define DRAMA_H
 
 #include "movie.h"
 
@@ -7,10 +7,10 @@
 
 namespace std
 {
-template <> struct hash<pair<string, int>>
+template <> struct hash<pair<string, string>>
 {
   // hash for pair<string, int>
-  size_t operator()(const pair<string, int> &p) const
+  size_t operator()(const pair<string, string> &p) const
   {
     size_t h = 0;
     for (char c : p.first)
@@ -18,22 +18,22 @@ template <> struct hash<pair<string, int>>
       h = (h << 5) + h + c;
     }
 
-    h += p.second;
+    h += p.second.size();
 
     return h;
   }
 };
 } // namespace std
 
-class Comedy : public Movie
+class Drama : public Movie
 {
-  friend class ComedyFactory;
+  friend class DramaFactory;
 
 private:
   int year;
 
 public:
-  Comedy(int stock, string director, string title, int year);
+  Drama(int stock, string director, string title, int year);
 
   string getInfo() override;
 
@@ -42,13 +42,13 @@ public:
   string getSecond() override;
 };
 
-class ComedyFactory : MovieFactory
+class DramaFactory : MovieFactory
 {
 private:
-  unordered_map<pair<string, int>, Comedy *> comedies;
+  unordered_map<pair<string, string>, Drama *> dramas;
 
 public:
-  ComedyFactory();
+  DramaFactory();
 
   Movie *makeMovie(const string &detail) override;
 

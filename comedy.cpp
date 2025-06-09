@@ -12,24 +12,27 @@ Comedy::Comedy(int stock, string director, string title, int year)
 
 string Comedy::getInfo()
 {
-  string s = title + ", " + to_string(year) + ", " + director + " (" + to_string(stock) +
-             ") - " + typeFull;
+  string s = title + ", " + to_string(year) + ", " + director + " (" +
+             to_string(stock) + ") - " + typeFull;
   return s;
 }
 
-int Comedy::getYear()
-{
-  return year;
-}
+string Comedy::getFirst() {return title;}
 
-ComedyFactory::ComedyFactory() { registerType("F", this); }
+string Comedy::getSecond() {return to_string(year);}
+
+ComedyFactory::ComedyFactory()
+{
+  registerType("F", this);
+  type = "F";
+}
 
 Movie *ComedyFactory::makeMovie(const string &detail)
 {
   vector<string> vs = System::splitString(detail);
 
   Comedy *comedy = new Comedy(stoi(vs[0]), vs[1], vs[2], stoi(vs[3]));
-  comedies[make_pair(comedy->director, comedy->year)] = comedy;
+  comedies[make_pair(comedy->title, comedy->year)] = comedy;
 
   return comedy;
 }
@@ -45,12 +48,12 @@ vector<Movie *> ComedyFactory::getMovies()
   sort(vm.begin(), vm.end(),
        [](auto a, auto b)
        {
-         if (a->getTitle() != b->getTitle())
+         if (a->getFirst() != b->getFirst())
          {
-           return a->getTitle() < b->getTitle();
+           return a->getFirst() < b->getFirst();
          }
 
-         return a->getYear() < b->getYear();
+         return stoi(a->getSecond()) < stoi(b->getSecond());
        });
 
   return vm;

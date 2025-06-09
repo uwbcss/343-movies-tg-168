@@ -1,6 +1,8 @@
 #include "showInventory.h"
 #include "movie.h"
 
+#include <algorithm>
+
 // execute the command
 vector<string> ShowInventory::execute() const
 {
@@ -9,6 +11,9 @@ vector<string> ShowInventory::execute() const
   {
     vmf.push_back(factory);
   }
+
+  sort(vmf.begin(), vmf.end(),
+       [](auto a, auto b) { return a->getType() > b->getType(); });
 
   vector<Movie *> vm;
   for (auto &&movieFactory : vmf)
