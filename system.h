@@ -4,6 +4,8 @@
 #include "command.h"
 #include "movie.h"
 
+#include <sstream>
+
 class System
 {
 private:
@@ -14,10 +16,22 @@ public:
   void addCommand(const string &type, const string &detail);
 
   // read commands from a txt file
-  void readFromFile(const string &filename);
+  void readCommandsFromFile(const string &filename);
+
+  // add a new movie to the list
+  void addMovie(const string &type, const string &detail);
+
+  // read movies from a txt file
+  void readMoviesFromFile(const string &filename);
 
   // execute all commands
   void executeAll();
+
+  // helper - get rid of spaces before and after string
+  static string trimString(const string &str);
+
+  // helper - split string into multiple based on delimiter
+  static vector<string> splitString(const string &str, char delimiter = ',');
 };
 
 #endif

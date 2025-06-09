@@ -20,7 +20,7 @@ Command *CommandFactory::create(const string &type, const string &detail)
 {
   if (!getMap().count(type))
   {
-    cout << "Don't know how to create " << type << endl;
+    cout << "Unknown command type: " << type << ", discarding line: " << detail << endl;
     return nullptr;
   }
 

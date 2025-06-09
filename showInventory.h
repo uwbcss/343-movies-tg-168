@@ -11,7 +11,7 @@ class ShowInventory : public Command
 {
 public:
   //show the inventory of movies
-  vector<string> &execute() const override;
+  vector<string> execute() const override;
 };
 
 class ShowInventoryFactory : public CommandFactory

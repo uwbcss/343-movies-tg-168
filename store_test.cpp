@@ -24,8 +24,13 @@ void testSystem()
 
   System s;
 
+  string mfile = "data4movies.txt";
+  s.readMoviesFromFile(mfile);
+
   string cfile = "testcommands-1.txt";
-  s.readFromFile(cfile);
+  s.readCommandsFromFile(cfile);
+
+  s.executeAll();
 
   cout << "End testSystem" << endl;
 }

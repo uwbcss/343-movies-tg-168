@@ -3,6 +3,7 @@
 
 #include <string>
 #include <unordered_map>
+#include <vector>
 
 using namespace std;
 
@@ -10,12 +11,18 @@ class Movie;
 
 class MovieFactory
 {
-public:
+  friend class System;
+
+public:  
   // make a movie, implemented by subclasses
-  virtual Movie *makeMovie() const = 0;
+  virtual Movie *makeMovie(const string &detail) = 0;
+
+  virtual vector<Movie *> getMovies() = 0;
 
   // find the corresponding movie factory and get factory to create the object
-  static Movie *create(const string &type);
+  static Movie *create(const string &type, const string &detail);
+
+  static const unordered_map<string, MovieFactory *> &getMapC();
 
 protected:
   // register a concrete factory with a given name
@@ -29,13 +36,23 @@ private:
 class Movie
 {
 public:
+  // constructor
+  Movie(string typeFull, int stock, string director, string title);
+  
+  virtual string getInfo() = 0;
+
   // Abstract classes should always have virtual destructors
   virtual ~Movie() = default;
 
+  string getTitle();
+
+  virtual int getYear() = 0;
+
 protected:
+  string typeFull;
   int stock;
   string director;
   string title;
 };
 
-#endif MOVIE_H
+#endif

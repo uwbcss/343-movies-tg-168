@@ -1,12 +1,32 @@
 #include "showInventory.h"
-#include <iostream>
+#include "movie.h"
 
-vector<string> &ShowInventory::execute() const
+// execute the command
+vector<string> ShowInventory::execute() const
 {
-  cout << "showInventory command executed" << endl;
+  vector<MovieFactory *> vmf;
+  for (auto &&[key, factory] : MovieFactory::getMapC())
+  {
+    vmf.push_back(factory);
+  }
 
-  vector<string> inventory;
-  return inventory;
+  vector<Movie *> vm;
+  for (auto &&movieFactory : vmf)
+  {
+    vector<Movie *> toAdd = movieFactory->getMovies();
+    for (auto &&movie : toAdd)
+    {
+      vm.push_back(movie);
+    }
+  }
+
+  vector<string> vs;
+  for (auto &&movie : vm)
+  {
+    vs.push_back(movie->getInfo());
+  }
+
+  return vs;
 }
 
 ShowInventoryFactory::ShowInventoryFactory() { registerType("I", this); }
